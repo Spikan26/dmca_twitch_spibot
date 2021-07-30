@@ -3,18 +3,15 @@ const request = require('postman-request');
 
 const tmi = require('tmi.js');
 const client = new tmi.Client({
-	options: { debug: true, messagesLogLevel: "info" },
-	connection: {
-		reconnect: true,
-		secure: true
-	},
+	
 	identity: {
 		username: process.env.TWITCH_USERNAME,
 		password: process.env.TWITCH_PASSWORD
 	},
-	channels: [ 'spikan' ]
+	channels: [ 'spikan', 'spiibot' ]
 });
 client.connect().catch(console.error);
+
 client.on('message', (channel, tags, message, self) => {
 	if(self) return;
 	if(message.toLowerCase() === '$spibot_run') {
